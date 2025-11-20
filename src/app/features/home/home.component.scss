@@ -1,53 +1,121 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    var(--md-sys-color-surface-container-high, #f3f4f6),
+    var(--md-sys-color-surface, #ffffff)
+  );
+  color: var(--md-sys-color-on-surface, #1f2933);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  padding-inline: 16px;
+  background: var(--md-sys-color-primary, #6750a4);
+  color: var(--md-sys-color-on-primary, #ffffff);
+}
+
+.app-logo {
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.app-toolbar-spacer {
+  flex: 1;
+}
+
+.app-menu-button {
+  // Se quiser esconder o menu por enquanto:
+  display: none;
+}
+
 .home-page {
-    min-height: calc(100vh - 64px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-    background: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  padding: 24px 16px 32px;
+}
+
+.home-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.home-card {
+  border-radius: 28px; // bem Material You
+  padding: 24px 20px;
+  background: var(--md-sys-color-surface-container-high, #ffffff);
+}
+
+.home-header {
+  text-align: center;
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0 0 8px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--md-sys-color-on-surface, #1f2933);
   }
-  
-  .home-container {
+
+  .home-subtitle {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant, #6b7280);
+  }
+}
+
+.home-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  .home-button {
     width: 100%;
-    max-width: 480px;
+    padding-block: 10px;
+    text-transform: none;
+    font-weight: 500;
+    border-radius: 999px; // botões bem pill, estilo M3
   }
-  
+
+  .primary-button {
+    // botão cheio
+  }
+
+  .outlined-button {
+    // botão contornado
+  }
+}
+
+.home-extra {
+  text-align: center;
+
+  .home-caption {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--md-sys-color-on-surface-variant, #6b7280);
+  }
+}
+
+/* Responsivo básico */
+@media (min-width: 768px) {
+  .home-page {
+    padding-top: 40px;
+  }
+
   .home-card {
-    padding: 24px;
-    text-align: center;
+    padding: 32px 28px;
   }
-  
-  .home-header {
-    margin-bottom: 24px;
-  
-    h1 {
-      margin: 0 0 8px;
-      font-size: 1.8rem;
-    }
-  
-    p {
-      margin: 0;
-      color: #555;
-    }
+
+  .home-header h1 {
+    font-size: 2.2rem;
   }
-  
-  .home-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    justify-content: center;
-  
-    button {
-      width: 100%;
-    }
-  
-    @media (min-width: 600px) {
-      flex-direction: row;
-  
-      button {
-        width: auto;
-        min-width: 150px;
-      }
-    }
-  }
-  
+}

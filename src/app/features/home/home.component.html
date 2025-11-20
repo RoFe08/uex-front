@@ -1,35 +1,53 @@
-<header>
-    <mat-toolbar color="primary">
-      <span>UEX Contacts</span>
-    </mat-toolbar>
-  </header>
-  
-  <main class="home-page">
-    <section class="home-container" aria-labelledby="home-title">
-      <mat-card class="home-card">
-        <header class="home-header">
-          <h1 id="home-title">Bem-vindo 👋</h1>
-          <p>Gerencie seus contatos com endereço e mapa em um só lugar.</p>
-        </header>
-  
-        <section class="home-actions" aria-label="Ações de autenticação">
-          <button
-            mat-raised-button
-            color="primary"
-            routerLink="/auth/login"
-          >
-            Entrar
-          </button>
-  
-          <button
-            mat-stroked-button
-            color="primary"
-            routerLink="/auth/signup"
-          >
-            Criar conta
-          </button>
-        </section>
-      </mat-card>
-    </section>
-  </main>
-  
+<header class="app-header">
+  <mat-toolbar class="app-toolbar" color="primary">
+    <span class="app-logo">UEX Contacts</span>
+    <span class="app-toolbar-spacer"></span>
+    <button
+      mat-icon-button
+      aria-label="Abrir menu"
+      class="app-menu-button"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </mat-toolbar>
+</header>
+
+<main class="home-page">
+  <section class="home-container" aria-labelledby="home-title">
+    <mat-card class="home-card mat-elevation-z4">
+      <header class="home-header">
+        <h1 id="home-title">Bem-vindo 👋</h1>
+        <p class="home-subtitle">
+          Gerencie seus contatos com endereço e mapa em um só lugar.
+        </p>
+      </header>
+
+      <section class="home-actions" aria-label="Ações de autenticação">
+        <button
+          mat-raised-button
+          color="primary"
+          class="home-button primary-button"
+          routerLink="/auth/login"
+        >
+          Entrar
+        </button>
+
+        <button
+          mat-stroked-button
+          color="primary"
+          class="home-button outlined-button"
+          routerLink="/auth/signup"
+        >
+          Criar conta
+        </button>
+      </section>
+
+      <section class="home-extra">
+        <p class="home-caption">
+          🗺️ Visualize seus contatos no mapa, salve endereços e encontre tudo
+          rapidamente.
+        </p>
+      </section>
+    </mat-card>
+  </section>
+</main>

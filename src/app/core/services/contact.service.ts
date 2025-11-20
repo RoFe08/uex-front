@@ -32,19 +32,19 @@ export class ContactService {
     return this.http.get<ContactPage>(this.baseUrl, { params });
   }
 
-  getById(id: number): Observable<Contact> {
-    return this.http.get<Contact>(`${this.baseUrl}/${id}`);
+  getById(idContact: number): Observable<Contact> {
+    return this.http.get<Contact>(`${this.baseUrl}/${idContact}`);
   }
 
   create(contact: Contact): Observable<Contact> {
     return this.http.post<Contact>(this.baseUrl, contact);
   }
 
-  update(id: number, contact: Contact): Observable<Contact> {
-    return this.http.put<Contact>(`${this.baseUrl}/${id}`, contact);
+  update(idContact: number, contact: Contact): Observable<Contact> {
+    return this.http.put<Contact>(`${this.baseUrl}/${idContact}`, contact);
   }
 
-  delete(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  delete(idContact: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${idContact}`);
   }
 }
