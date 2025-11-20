@@ -1,0 +1,82 @@
+.app-shell {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+  }
+  
+  .app-header {
+    height: 64px;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(18px);
+    background: linear-gradient(
+      90deg,
+      rgba(11, 16, 32, 0.95),
+      rgba(5, 8, 20, 0.96)
+    );
+    border-bottom: 1px solid rgba(46, 199, 214, 0.35);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  }
+  
+  .app-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    .logo-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: radial-gradient(circle at 30% 20%, #ffffff, var(--ux-primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #02080a;
+      text-transform: uppercase;
+    }
+  
+    .logo-text {
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      font-size: 0.95rem;
+      color: var(--ux-text);
+    }
+  }
+  
+  .app-nav {
+    display: flex;
+    gap: 8px;
+  
+    button {
+      text-transform: none;
+      font-size: 0.9rem;
+  
+      mat-icon {
+        margin-right: 4px;
+        font-size: 18px;
+      }
+    }
+  }
+  
+  .app-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--ux-text-muted);
+  
+    mat-icon {
+      font-size: 24px;
+    }
+  }
+  
+  .app-main {
+    flex: 1;
+    padding: 24px;
+  }
+  

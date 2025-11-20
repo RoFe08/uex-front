@@ -1,0 +1,143 @@
+<section class="page-wrapper">
+  <header class="page-header">
+    <div class="page-title">
+      <mat-icon class="page-icon">contacts</mat-icon>
+      <div>
+        <h1>Contatos</h1>
+        <p>Gerencie seus contatos e visualize no mapa.</p>
+      </div>
+    </div>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="newContact()"
+    >
+      <mat-icon>add</mat-icon>
+      Novo contato
+    </button>
+    <button mat-button color="warn" (click)="onDeleteAccount()">
+      <mat-icon>person_off</mat-icon>
+      Excluir conta
+    </button>
+  </header>
+
+  <section class="page-content">
+    <div class="card card-table">
+      <form
+        [formGroup]="filterForm"
+        (ngSubmit)="onSearch()"
+        class="filter-form"
+      >
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Nome/CPF</mat-label>
+          <input
+            matInput
+            type="search"
+            formControlName="term"
+            placeholder="Buscar por Nome/CPF"
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <button mat-stroked-button color="primary" type="submit">
+          <mat-icon>filter_list</mat-icon>
+          Filtrar
+        </button>
+
+        <button mat-button type="button" (click)="clearSearch()">
+          <mat-icon>close</mat-icon>
+          Limpar
+        </button>
+      </form>
+
+      <div class="table-container">
+        <table
+          mat-table
+          [dataSource]="contacts"
+          aria-label="Tabela de contatos"
+        >
+          <!-- Nome -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td
+              mat-cell
+              *matCellDef="let contact"
+              (click)="selectContact(contact)"
+            >
+              {{ contact.name }}
+            </td>
+          </ng-container>
+
+          <!-- CPF -->
+          <ng-container matColumnDef="cpf">
+            <th mat-header-cell *matHeaderCellDef> CPF </th>
+            <td mat-cell *matCellDef="let contact">
+              {{ contact.cpf }}
+            </td>
+          </ng-container>
+
+          <!-- Telefone -->
+          <ng-container matColumnDef="phone">
+            <th mat-header-cell *matHeaderCellDef> Telefone </th>
+            <td mat-cell *matCellDef="let contact">
+              {{ contact.phone }}
+            </td>
+          </ng-container>
+
+          <!-- Ações -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Ações </th>
+            <td mat-cell *matCellDef="let contact">
+              <button
+                mat-icon-button
+                color="primary"
+                (click)="editContact(contact)"
+                aria-label="Editar contato"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+
+              <button
+                mat-icon-button
+                color="warn"
+                (click)="deleteContact(contact)"
+                aria-label="Excluir contato"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+            (click)="selectContact(row)"
+            [class.selected-row]="selectedContact?.id === row.id"
+          ></tr>        
+
+          <tr class="empty-row" *ngIf="contacts.length === 0">
+            <td [attr.colspan]="displayedColumns.length">
+              Nenhum contato encontrado.
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card card-map">
+      <header class="card-header">
+        <mat-icon>map</mat-icon>
+        <span>Mapa de contatos</span>
+      </header>
+
+      <app-contact-map
+        [contacts]="contacts"
+        [selectedContact]="selectedContact"
+        (markerSelected)="onMarkerSelected($event)"
+      ></app-contact-map>
+    </div>
+  </section>
+</section>

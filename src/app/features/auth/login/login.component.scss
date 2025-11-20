@@ -1,0 +1,106 @@
+:root {
+    --primary-contrast: #2ec7d6;
+    --btn-primary: linear-gradient(135deg, #5a4bff, #7a5cff);
+  }
+  
+  /* Layout geral */
+  .auth-page {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #2ec7d6 0%, #1b8f9a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Container central */
+  .auth-container {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+  }
+  
+  /* Cabeçalho */
+  .auth-header h1 {
+    font-size: 2.2rem;
+    color: #ffffff;
+    margin-bottom: 5px;
+  }
+  
+  .auth-header p {
+    color: #e8fafa;
+    margin-bottom: 25px;
+    font-size: 15px;
+  }
+  
+  /* Card principal */
+  .auth-card {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+  }
+  
+  /* Inputs */
+  mat-form-field {
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  /* Botão Entrar */
+  .auth-actions button {
+    width: 100%;
+    padding: 12px 0;
+    border-radius: 30px;
+    background: var(--btn-primary);
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 10px 25px rgba(90, 75, 255, 0.45);
+    transition: all 0.3s ease;
+  }
+  
+  .auth-actions button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px rgba(90, 75, 255, 0.55);
+  }
+  
+  /* Erros */
+  .auth-error p {
+    color: #ffdddd;
+    background: rgba(255, 0, 0, 0.15);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  /* Footer */
+  .auth-footer {
+    margin-top: 15px;
+  }
+  
+  .auth-footer p {
+    color: #f0fafa;
+  }
+  
+  .auth-footer a {
+    color: #5a4bff;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Deixar campos mais clean */
+  ::ng-deep .mat-form-field-outline {
+    border-radius: 8px;
+  }
+  
+  /* Spinner centralizado no botão */
+  mat-progress-spinner {
+    margin: 0 auto;
+  }
+  

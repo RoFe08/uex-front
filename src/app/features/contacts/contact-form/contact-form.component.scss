@@ -1,0 +1,34 @@
+.address-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  
+    .small-field {
+      flex: 0 0 120px;
+    }
+  
+    .medium-field {
+      flex: 1 1 200px;
+    }
+  }
+  
+  .address-suggestions {
+    margin-top: 16px;
+    font-size: 0.9rem;
+  
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 8px 0 0;
+    }
+  
+    li {
+      margin-bottom: 4px;
+    }
+  
+    button {
+      text-align: left;
+      width: 100%;
+    }
+  }
+  

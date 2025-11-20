@@ -1,0 +1,16 @@
+.map-wrapper {
+    google-map {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(46, 199, 214, 0.5);
+      box-shadow: 0 0 18px rgba(46, 199, 214, 0.3);
+      min-height: 320px;
+    }
+  }
+  
+  .map-empty {
+    margin: 16px 0;
+    font-size: 0.9rem;
+    color: var(--ux-text-muted);
+  }
+  

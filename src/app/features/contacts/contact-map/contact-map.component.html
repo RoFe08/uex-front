@@ -1,0 +1,26 @@
+<section class="map-wrapper" aria-label="Mapa de contatos">
+    <ng-container *ngIf="markers.length > 0; else noMarkers">
+      <google-map
+        height="350px"
+        width="100%"
+        [center]="center"
+        [zoom]="zoom"
+      >
+        <map-marker
+          *ngFor="let m of markers"
+          [position]="m.position"
+          [title]="m.title"
+          [options]="{ icon: markerIcon(m) }"
+          (mapClick)="onMarkerClick(m)"
+        >
+        </map-marker>
+      </google-map>
+    </ng-container>
+  
+    <ng-template #noMarkers>
+      <p class="map-empty">
+        Nenhum contato com coordenadas para exibir no mapa.
+      </p>
+    </ng-template>
+  </section>
+  

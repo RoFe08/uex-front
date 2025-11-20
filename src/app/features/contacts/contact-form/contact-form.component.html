@@ -1,0 +1,125 @@
+<main class="contact-form-page" aria-labelledby="contact-form-title">
+    <section class="contact-form-container">
+      <mat-card>
+        <header class="contact-form-header">
+          <h1 id="contact-form-title">
+            {{ isEdit ? 'Editar contato' : 'Novo contato' }}
+          </h1>
+        </header>
+  
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="contact-form"
+          novalidate
+        >
+          <section aria-label="Dados básicos" class="form-section">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="name" required />
+              <mat-error *ngIf="name?.hasError('required')">
+                Nome é obrigatório.
+              </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>CPF</mat-label>
+              <input matInput formControlName="cpf" required />
+            </mat-form-field>
+  
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="phone" required />
+            </mat-form-field>
+          </section>
+  
+          <section aria-label="Endereço" class="form-section">
+            <div class="address-row">
+              <mat-form-field appearance="outline" class="small-field">
+                <mat-label>CEP</mat-label>
+                <input matInput formControlName="cep" (blur)="onCepBlur()" required />
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline" class="small-field">
+                <mat-label>UF</mat-label>
+                <input matInput formControlName="state" required />
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline" class="medium-field">
+                <mat-label>Cidade</mat-label>
+                <input matInput formControlName="city" required />
+              </mat-form-field>
+            </div>
+          
+            <div class="address-row">
+              <mat-form-field appearance="outline" class="medium-field">
+                <mat-label>Rua</mat-label>
+                <input matInput formControlName="street" required />
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline" class="small-field">
+                <mat-label>Número</mat-label>
+                <input matInput formControlName="number" required />
+              </mat-form-field>
+          
+              <mat-form-field appearance="outline" class="medium-field">
+                <mat-label>Complemento</mat-label>
+                <input matInput formControlName="complement" />
+              </mat-form-field>
+            </div>
+          
+            <div class="address-row">
+              <mat-form-field appearance="outline" class="medium-field">
+                <mat-label>Bairro</mat-label>
+                <input matInput formControlName="neighborhood" required />
+              </mat-form-field>
+          
+              <button
+                mat-stroked-button
+                type="button"
+                (click)="searchAddress()"
+                [disabled]="loadingAddress"
+              >
+                <ng-container *ngIf="!loadingAddress; else loadingTpl">
+                  Buscar no ViaCEP
+                </ng-container>
+                <ng-template #loadingTpl>
+                  Buscando...
+                </ng-template>
+              </button>
+            </div>
+          
+            <section
+              class="address-suggestions"
+              *ngIf="addressSuggestions.length > 0"
+              aria-label="Sugestões de endereços"
+            >
+              <p>Selecione um endereço sugerido:</p>
+              <ul>
+                <li *ngFor="let suggestion of addressSuggestions">
+                  <button
+                    type="button"
+                    mat-button
+                    (click)="applySuggestion(suggestion)"
+                  >
+                    {{ suggestion.street }}, {{ suggestion.neighborhood }} -
+                    {{ suggestion.city }}/{{ suggestion.state }} (CEP: {{ suggestion.cep }})
+                  </button>
+                </li>
+              </ul>
+            </section>
+          </section>          
+  
+          <section class="form-actions">
+            <button mat-stroked-button type="button" (click)="cancel()">
+              Cancelar
+            </button>
+            <button mat-raised-button color="primary" type="submit">
+              {{ isEdit ? 'Salvar' : 'Criar' }}
+            </button>
+          </section>
+        </form>
+      </mat-card>
+    </section>
+  </main>
+  
