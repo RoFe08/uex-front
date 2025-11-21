@@ -111,6 +111,7 @@ export class ContactListComponent implements OnInit {
     if (!confirm(`Excluir contato "${contact.name}"?`)) return;
 
     this.contactService.delete(contact.id).subscribe(() => {
+      this.toastrService.success('Contato excluído com sucesso.');
       this.loadContacts();
     });
   }

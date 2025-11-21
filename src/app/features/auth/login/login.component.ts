@@ -10,6 +10,7 @@ import { MatButtonModule }     from '@angular/material/button';
 import { MatCardModule }       from '@angular/material/card';
 import { MatIconModule }       from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 interface LoginRequest {
   email: string;
@@ -47,6 +48,7 @@ export class LoginComponent {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private router = inject(Router);
+  private toastrService = inject(ToastrService);
 
   hidePassword = true;
   loading = false;
@@ -83,17 +85,13 @@ export class LoginComponent {
 
         localStorage.setItem('auth_token', res.token);
         localStorage.setItem('auth_user', JSON.stringify(res.user));
-
+        this.toastrService.success('Bem vindo 😄');
         this.router.navigate(['/contacts']);
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
 
-        if (err.status === 401) {
-          this.authError = 'E-mail ou senha inválidos.';
-        } else {
-          this.authError = 'Ocorreu um erro ao autenticar. Tente novamente.';
-        }
+        this.toastrService.error(err.error?.message || '');
       }
     });
   }
