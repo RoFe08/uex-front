@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ContactService } from '../../../core/services/contact.service';
 import { AddressService, AddressSuggestion } from '../../../core/services/address.service';
 import { Contact } from '../../../shared/models/contact.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact-form',
@@ -32,6 +33,7 @@ export class ContactFormComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private addressService = inject(AddressService);
+  private toastrService = inject(ToastrService);
 
   addressSuggestions: AddressSuggestion[] = [];
   loadingAddress = false;
@@ -74,20 +76,45 @@ export class ContactFormComponent implements OnInit {
       this.form.markAllAsTouched();
       return;
     }
-
+  
     const contact: Contact = this.form.value as Contact;
-
-    if (this.isEdit && this.contactId) {
-      this.contactService.update(this.contactId, contact).subscribe(() => {
-        this.router.navigate(['/contacts']);
-      });
-    } else {
-      this.contactService.create(contact).subscribe(() => {
-        this.router.navigate(['/contacts']);
-      });
-    }
+    this.isEdit && this.contactId
+      ? this.updateContact(contact)
+      : this.createContact(contact);
   }
 
+  private createContact(contact: Contact): void {
+    this.contactService.create(contact).subscribe({
+      next: () => {
+        this.navigateToContactsList();
+        this.toastrService.success('Contato cadastrado com sucesso.');
+      },
+      error: (err) => this.handleError(err, 'Erro ao cadastrar contato. Tente novamente.')
+    });
+  }
+  
+  private updateContact(contact: Contact): void {
+    this.contactService.update(this.contactId!, contact).subscribe({
+      next: () => {
+        this.navigateToContactsList();
+        this.toastrService.success('Contato atualizado com sucesso.');
+      },
+      error: (err) => this.handleError(err, 'Erro ao atualizar contato. Tente novamente.')
+    });
+  }
+
+  private handleError(err: any, fallbackMessage: string): void {
+    if (err.status === 409) {
+      this.toastrService.error(err.error?.message || '');
+    } else {
+      alert(fallbackMessage);
+    }
+  }
+  
+  private navigateToContactsList(): void {
+    this.router.navigate(['/contacts']);
+  }  
+  
   searchAddress(): void {
     const uf = this.form.get('state')?.value;
     const city = this.form.get('city')?.value;
