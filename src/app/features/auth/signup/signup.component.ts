@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule }      from '@angular/material/input';
@@ -45,7 +46,8 @@ const passwordMatchValidator: ValidatorFn = (group: AbstractControl): Validation
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    RouterModule
   ],
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
@@ -55,6 +57,7 @@ export class SignupComponent {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
   private router = inject(Router);
+  private toastrService = inject(ToastrService);
 
   loading = false;
   genericError: string | null = null;
@@ -79,40 +82,43 @@ export class SignupComponent {
   onSubmit(): void {
     this.genericError = null;
     this.emailError = null;
-
+  
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
-
+  
     const payload: SignupRequest = {
       name: this.name?.value!,
       email: this.email?.value!,
       password: this.password?.value!
     };
-
+  
     this.loading = true;
-
+  
     this.http.post<AuthResponse>(this.apiUrl, payload).subscribe({
       next: (res) => {
         this.loading = false;
-
+  
         localStorage.setItem('auth_token', res.token);
         localStorage.setItem('auth_user', JSON.stringify(res.user));
-
+  
+        this.toastrService.success('Conta criada com sucesso! 🎉');
         this.router.navigate(['/contacts']);
       },
       error: (err: HttpErrorResponse) => {
         this.loading = false;
-
+  
         if (err.status === 409) {
-          this.emailError = 'Este e-mail já está em uso. Tente outro.';
+          // mensagem vinda do backend
+          this.toastrService.error(err.error?.message || 'E-mail já está em uso.');
         } else {
-          this.genericError = 'Não foi possível criar sua conta. Tente novamente.';
+          this.toastrService.error('Não foi possível criar sua conta. Tente novamente.');
         }
       }
     });
   }
+  
 
   hasPasswordMismatch(): boolean {
     return !!(this.form.errors?.['passwordMismatch'] && (this.password?.touched || this.confirmPassword?.touched));

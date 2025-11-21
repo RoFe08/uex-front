@@ -1,34 +1,138 @@
-.address-row {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  
-    .small-field {
-      flex: 0 0 120px;
-    }
-  
-    .medium-field {
-      flex: 1 1 200px;
-    }
+/* PÁGINA */
+
+.contact-form-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  padding: 16px;
+}
+
+.contact-form-container {
+  width: 100%;
+  max-width: 700px;
+}
+
+/* CARD */
+
+mat-card {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+/* HEADER */
+
+.contact-form-header {
+  margin-bottom: 16px;
+
+  h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #222;
   }
-  
-  .address-suggestions {
-    margin-top: 16px;
-    font-size: 0.9rem;
-  
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 8px 0 0;
-    }
-  
-    li {
-      margin-bottom: 4px;
-    }
-  
+}
+
+/* FORMULÁRIO */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+/* ENDEREÇO */
+
+.address-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  .small-field {
+    flex: 0 0 120px;
+    min-width: 120px;
+  }
+
+  .medium-field {
+    flex: 1 1 220px;
+    min-width: 200px;
+  }
+
+  button {
+    align-self: flex-end;
+  }
+}
+
+/* SUGESTÕES */
+
+.address-suggestions {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  button {
+    text-align: left;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+/* AÇÕES */
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+
+  button {
+    min-width: 140px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* RESPONSIVO */
+
+@media (max-width: 600px) {
+  .contact-form-container {
+    max-width: 100%;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+
     button {
-      text-align: left;
       width: 100%;
     }
   }
-  
+}

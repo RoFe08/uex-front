@@ -13,6 +13,7 @@ import { ContactService } from '../../../core/services/contact.service';
 import { Contact } from '../../../shared/models/contact.model';
 import { ContactMapComponent } from '../contact-map/contact-map.component';
 import { AuthService } from '../../../core/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class ContactListComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService: AuthService = inject(AuthService);
+  private toastrService = inject(ToastrService);
 
   displayedColumns = ['name', 'cpf', 'phone', 'actions'];
 
@@ -127,8 +129,8 @@ export class ContactListComponent implements OnInit {
     this.authService.deleteAccount(password).subscribe({
       next: () => {},
       error: (err) => {
-        if (err.status === 401) {
-          alert('Senha inválida. Conta não foi excluída.');
+        if (err.status === 409) {
+          this.toastrService.error(err.error?.message || '');
         } else {
           alert('Erro ao excluir conta. Tente novamente.');
         }
