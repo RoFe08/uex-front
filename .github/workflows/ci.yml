@@ -25,4 +25,4 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            xcpo/uex-front:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/uex-front:latest
