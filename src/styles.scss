@@ -33,4 +33,23 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  background: #f5f5f5;
+}
+
+body.nerd-mode {
+  background-image: url('https://wallpapers-clan.com/wp-content/uploads/2024/10/hogwarts-castle-magical-lake-view-desktop-wallpaper-preview.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+body.nerd-mode .mat-card {
+  background: rgba(30, 18, 10, 0.85) !important;
+  color: #f5d37b;
+  border: 2px solid #b8860b;
+}
+
+body.nerd-mode button {
+  background: linear-gradient(135deg, #b8860b, #3e2723);
+  color: #fff;
 }

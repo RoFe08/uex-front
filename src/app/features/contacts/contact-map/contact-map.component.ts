@@ -26,6 +26,7 @@ export class ContactMapComponent implements OnChanges {
 
   @Input() contacts: Contact[] = [];
   @Input() selectedContact: Contact | null = null;
+  @Input() icon = '';
 
   center: google.maps.LatLngLiteral = { lat: -25.4284, lng: -49.2733 };
   zoom = 12;
@@ -73,20 +74,13 @@ export class ContactMapComponent implements OnChanges {
     this.zoom = 12;
   }
 
-  markerIcon(marker: ContactMarker): google.maps.Symbol | undefined {
-    if (!marker.isSelected) {
-      return undefined;
-    }
-
-    return {
-      path: google.maps.SymbolPath.CIRCLE,
-      scale: 8,
-      fillColor: '#1976d2',
-      fillOpacity: 1,
-      strokeColor: '#ffffff',
-      strokeWeight: 2,
-    };
-  }
+  markerIcon(marker: ContactMarker): google.maps.Icon | google.maps.Symbol | undefined {
+    if (!marker.isSelected) return undefined;
+  
+    const nerdMode = document.body.classList.contains('nerd-mode');
+  
+    return nerdMode ? this.nerdIcon : this.defaultIcon;
+  }  
 
   onMarkerClick(marker: ContactMarker): void {
     
@@ -98,5 +92,19 @@ export class ContactMapComponent implements OnChanges {
         this.markerSelected.emit(marker.contactId);
       }
   }
+
+  defaultIcon: google.maps.Symbol = {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 8,
+    fillColor: '#1976d2',
+    fillOpacity: 1,
+    strokeColor: '#ffffff',
+    strokeWeight: 2,
+  };
+  
+  nerdIcon: google.maps.Icon = {
+    url: 'https://i.pinimg.com/originals/1b/99/ae/1b99ae9c671f4fe720b1af04c1ca053c.gif',
+    scaledSize: new google.maps.Size(50, 50)
+  };  
   
 }

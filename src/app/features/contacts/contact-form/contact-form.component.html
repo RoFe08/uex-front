@@ -80,7 +80,7 @@
                 (click)="searchAddress()"
                 [disabled]="loadingAddress"
               >
-                <ng-container *ngIf="!loadingAddress; else loadingTpl">
+                <ng-container color="warn" *ngIf="!loadingAddress; else loadingTpl">
                   Buscar no ViaCEP
                 </ng-container>
                 <ng-template #loadingTpl>
@@ -111,7 +111,7 @@
           </section>          
   
           <section class="form-actions">
-            <button mat-stroked-button type="button" (click)="cancel()">
+            <button mat-stroked-button color="accent" type="button" (click)="cancel()">
               Cancelar
             </button>
             <button mat-raised-button color="primary" type="submit">

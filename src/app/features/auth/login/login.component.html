@@ -1,11 +1,10 @@
 <main class="auth-page">
     <section class="auth-container" aria-labelledby="login-title">
-      <header class="auth-header">
-        <h1 id="login-title">Entrar</h1>
-        <p>Faça login para acessar sua agenda de contatos.</p>
-      </header>
-  
       <mat-card class="auth-card" role="form">
+        <header class="auth-header">
+          <h1 id="login-title">Entrar</h1>
+          <p>Faça login para acessar sua agenda de contatos.</p>
+        </header>
         <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
           <div class="form-group">
             <mat-form-field appearance="outline" class="full-width">
@@ -81,6 +80,11 @@
             <p>
               Ainda não tem conta?
               <a routerLink="/auth/signup">Criar conta</a>
+            </p>
+            <p>Ou</p>
+            <p>
+              Voltar para a página
+              <a routerLink="/home">inicial.</a>
             </p>
           </footer>
         </form>
